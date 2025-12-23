@@ -1,4 +1,5 @@
 <!-- docs/_sidebar.md -->
 
 - [Home](/)
-- [about](/about)
+- [guide](guide.md "神秘入口")
+- [about](/about/readme.md)

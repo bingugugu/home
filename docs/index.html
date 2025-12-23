@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="description" content="Description"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/buble.css"/>
+<!-- 主题 -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/dolphin.css"/>
     <style type="text/css">
         .sidebar-nav > ul > li.file p > a {
             font-size: 15px;
@@ -26,13 +27,14 @@
 <script>
     window.$docsify = {
         name: '寻常巷陌',
-        repo: '',
+        repo: 'https://github.com/bingugugu/home',
         loadSidebar: true,
+        loadNavbar: true,
         coverpage: true,
         subMaxLevel: 2,
-        onlyCover: true,
-        auto2top: true,
-        mergeNavbar: true,
+        // onlyCover: true,
+        // auto2top: true,
+        // mergeNavbar: true,
 
         alias: {
             '/.*/_sidebar.md': '/_sidebar.md'
@@ -50,17 +52,19 @@
         },
         search: {
             maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-            paths: 'auto', // or 'auto'
-            placeholder: '搜索',
-            noData: '无结果',
+            paths: 'auto',
+            placeholder: 'search',
+            noData: '找不到结果',
+            depth: 2,
             hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
             namespace: 'website-1',
-            pathNamespaces: ['/', '/config', '/guide']
+            pathNamespaces: ['/', '/about']
         }
     }
 </script>
 <!-- Docsify v4 -->
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<!-- 搜索插件 -->
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 <script src="//unpkg.com/docsify-count/dist/countable.js"></script>

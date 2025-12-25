@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- docsify 核心样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    <!-- 可选：暗黑模式主题（二选一/都加） -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css" title="Dark"> -->
     <!-- 2. 后加载自定义 CSS 文件（核心！） -->
     <link rel="stylesheet" href="css/color-scheme.css">
     <link rel="stylesheet" href="css/layout.css">
@@ -21,7 +19,7 @@
 
 <body>
     <!-- 页面挂载点 -->
-    <div id="app"></div>
+    <div id="app">拯救世界中···</div>
 
     <script>
         window.$docsify = {
@@ -31,7 +29,7 @@
             loadSidebar: true, // 启用侧边栏（需创建 _sidebar.md）
             loadNavbar: true, // 启用顶部导航栏（需创建 _navbar.md）
             auto2top: true, // 切换页面时回到顶部
-            homepage: 'README.md', // 首页文件
+            homepage: '/README.md', // 首页文件
             coverpage: true, // 启用封面页（需创建 _coverpage.md）
             subMaxLevel: 3, // 侧边栏支持的 Markdown 标题层级
             alias: { // 路径别名（方便整理笔记）
@@ -40,22 +38,13 @@
             search: {
                 maxAge: 86400000, // 过期时间，单位毫秒，默认一天
                 paths: 'auto',
-                placeholder: 'search',
-                noData: '找不到结果',
+                placeholder: '上知天文下晓地理',
+                noData: '不识此物',
                 depth: 2,
                 hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
                 namespace: 'website-1',
                 // pathNamespaces: ['/', '/about']
             },
-            // 插件配置（按需添加）
-            plugins: [
-                // 代码复制按钮
-                function (hook, vm) {
-                    hook.afterEach(function (html) {
-                        return html + '<script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"><\/script>';
-                    });
-                }
-            ]
         }
     </script>
 

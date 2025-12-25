@@ -17,6 +17,15 @@
   /* 边框 */
   --border-color: #e0e6ed;
 }
+/* 测试样式（先验证加载） */
+body {
+  background: #f1e7e5 !important;
+}
+/* 顶部导航 hover 效果 */
+.app-nav li a:hover {
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
 
 /* ========== 暗黑模式配色 ========== */
 /* [data-theme="dark"] {

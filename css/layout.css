@@ -1,9 +1,4 @@
 /* ========== 精细化样式修改 ========== */
-/* 顶部导航 hover 效果 */
-.app-nav li a:hover {
-  color: var(--main-color-hover);
-  border-bottom: 2px solid var(--main-color);
-}
 /* 侧边栏折叠按钮 */
 .sidebar-toggle:hover {
   color: var(--main-color-hover) !important;

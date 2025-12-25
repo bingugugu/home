@@ -5,7 +5,7 @@
 > 欢迎赛博考古。
 
 [GitHub](https://github.com/bingugugu)
-[Get Started](#docsify)
+[Get Started](/readme.md)
 
 <!-- background image -->
 <!-- ![](_media/bg.png) -->

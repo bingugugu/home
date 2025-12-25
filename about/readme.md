@@ -12,4 +12,4 @@
 ### 感谢
 
 感谢以下开源项目，为本项目提供了基础支持：
-docsify: [https://docsify.js.org/#/](https://docsify.js.org/#/)
+- docsify：[https://docsify.js.org/#/](https://docsify.js.org/#/)

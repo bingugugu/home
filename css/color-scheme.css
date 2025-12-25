@@ -1,0 +1,30 @@
+/* ========== 浅色模式核心配色 ========== */
+:root {
+  /* 主色：替换为你的专属色（比如深蓝） */
+  --main-color: #d3a488;
+  --main-color-hover: #1565C0;
+  /* 页面背景 */
+  --bg-color: #f1e7e5;
+  /* 文字色 */
+  --text-color: #1d4c50;
+  --text-color-secondary: #546E7A;
+  /* 侧边栏 */
+  --sidebar-bg: #bdaead;
+  --sidebar-nav-active-bg: rgba(25, 118, 210, 0.1);
+  /* 代码块 */
+  --code-bg: #d3a488;
+  --inline-code-bg: #f1e7e5;
+  /* 边框 */
+  --border-color: #e0e6ed;
+}
+
+/* ========== 暗黑模式配色 ========== */
+/* [data-theme="dark"] {
+  --main-color: #64B5F6;
+  --bg-color: #12192c;
+  --text-color: #e0e6ed;
+  --sidebar-bg: #1a2238;
+  --code-bg: #1e2638;
+  --border-color: #2d3748;
+} */
+

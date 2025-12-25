@@ -1,8 +1,7 @@
-# 寻常巷陌
+## 寻常巷陌
 
-> 欢迎赛博考古
+欢迎赛博考古
 
-[GitHub](https://github.com/bingugugu)
 [Get Started](/readme.md)
 
 <!-- background image -->

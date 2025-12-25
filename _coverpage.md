@@ -2,7 +2,7 @@
 
 > 欢迎赛博考古
 
-[Get Started](/readme.md)
+[Get Started](/)
 
 <!-- background image -->
 <!-- ![](_media/bg.png) -->

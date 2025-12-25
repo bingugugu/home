@@ -1,6 +1,4 @@
-![logo](/pictures/icon/home.ico)
-
-# 寻常巷陌 <small>3.5</small>
+# 寻常巷陌 <small>1.0</small>
 
 > 欢迎赛博考古。
 

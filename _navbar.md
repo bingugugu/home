@@ -1,5 +1,8 @@
 * 神秘入口
-    *[:note:readme](README.md)
-    *[神秘入口](guide.md)
+  * [首页](/)
+  * [笔记目录](/notes/)
+  * [GitHub](https://github.com/bingugugu)
+* 工具
+  * [在线编辑器](https://code.visualstudio.com/)
 * 关于
-    *[:home:关于](about/readme.md)
+  * [关于](/about/)

@@ -1,0 +1,162 @@
+/* ========== 夕阳古楼 - 核心配色变量（浅色模式） ========== */
+/* ================= SunsetAncientBuilding ================= */
+:root {
+  --main-color: #f0a72e;
+  --main-color-hover: #d89622;
+  --text-color: #313534;
+  --text-color-secondary: #ae7f77;
+  --bg-color: #fffef8;
+  --sidebar-bg: #ffffff;
+  --sidebar-nav-active-bg: rgba(247, 205, 155, 0.3);
+  --navbar-bg: #ffffff;
+  --border-color: #ae7f77;
+  --border-color-light: rgba(174, 127, 119, 0.2);
+  --code-bg: #fff9f0;
+  --code-text-color: #313534;
+  --code-border-color: #ae7f77;
+  --inline-code-bg: rgba(247, 205, 155, 0.4);
+  --inline-code-color: #313534;
+  --cover-bg: #fffef8;
+  --cover-text-color: #313534;
+  --cover-highlight-color: #f0a72e;
+  /* 新增：字体变量（方便统一修改） */
+  --font-sans: 'Google Sans Code', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Google Sans Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* ========== 暗黑模式（保留原有，新增字体变量） ========== */
+[data-theme="dark"] {
+  --main-color: #f7cd9b;
+  --main-color-hover: #f0a72e;
+  --text-color: #f7cd9b;
+  --text-color-secondary: #ae7f77;
+  --bg-color: #232423;
+  --sidebar-bg: #1d1e1d;
+  --sidebar-nav-active-bg: rgba(174, 127, 119, 0.3);
+  --navbar-bg: #1d1e1d;
+  --border-color: #ae7f77;
+  --code-bg: #2a2b2a;
+  --code-border-color: rgba(174, 127, 119, 0.4);
+  --inline-code-bg: rgba(240, 167, 46, 0.2);
+  /* 暗黑模式字体变量（和浅色模式一致即可） */
+  --font-sans: 'Google Sans Code', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Google Sans Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* ========== 全局字体配置（核心修改） ========== */
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  /* 全局西文用 Google Sans Code，中文用思源黑体/苹方（暖调适配） */
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6; /* 提升行高，优化阅读 */
+}
+
+/* 标题字体（加粗+Google Sans Code） */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  font-family: var(--font-sans);
+  font-weight: 600; /* Google Sans Code 600 权重，更醒目 */
+}
+h1 {
+  border-bottom-color: var(--border-color);
+  font-size: 24px;
+}
+
+/* 代码字体（纯 Google Sans Code，适配代码显示） */
+pre > code, code {
+  font-family: var(--font-mono) !important;
+  font-size: 14px; /* 代码字体稍小，更紧凑 */
+}
+
+/* 侧边栏/导航字体（保留 Google Sans Code） */
+.sidebar-nav li a, .app-nav li a {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* ========== 原有精细化样式（保留不变） ========== */
+.app-nav {
+  border-bottom: 1px solid var(--border-color-light);
+}
+.app-nav li a {
+  color: var(--text-color);
+}
+.app-nav li a:hover,
+.app-nav li a.active {
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
+
+.sidebar {
+  border-right: 1px solid var(--border-color-light);
+}
+.sidebar-nav li a {
+  color: var(--text-color);
+}
+.sidebar-nav li.active > a {
+  color: var(--main-color) !important;
+  background-color: var(--sidebar-nav-active-bg) !important;
+  border-left: 3px solid var(--main-color);
+}
+.sidebar-toggle {
+  color: var(--text-color-secondary) !important;
+}
+.sidebar-toggle:hover {
+  color: var(--main-color) !important;
+}
+
+a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--main-color-hover);
+  text-decoration: underline;
+}
+
+pre > code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text-color) !important;
+  border: 1px solid var(--code-border-color);
+  border-radius: 4px;
+}
+code {
+  background-color: var(--inline-code-bg) !important;
+  color: var(--inline-code-color) !important;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.cover-main > p > a {
+  color: var(--cover-highlight-color);
+  border: 1px solid var(--cover-highlight-color);
+}
+.cover-main > p > a:hover {
+  background-color: var(--cover-highlight-color);
+  color: #ffffff;
+}
+.cover-main h1 {
+  color: var(--cover-highlight-color);
+  border-bottom: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-color-secondary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color);
+}

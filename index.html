@@ -20,15 +20,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
     <!-- 2. 后加载自定义 CSS 文件（核心！） -->
     <!-- <link rel="stylesheet" href="css/scheme-SunsetAncientBuilding.css"> -->
-    <link rel="stylesheet" href="css/scheme-UnderCapitalLight.css" title="light">
-    <link rel="stylesheet" href="css/scheme-UnderCapitalDark.css" title="dark">
+    <link rel="stylesheet" href="css/scheme-UnderCaptialLight.css" title="light">
+    <link rel="stylesheet" href="css/scheme-UnderCaptialDark.css" title="dark">
     <link rel="stylesheet" href="css/layout.css">
 
 </head>
 
 <body>
     <!-- 主题切换按钮 -->
-    <div class="demo-theme-preview"
+    <div class="theme-preview"
         style="position: fixed; top: 10px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
         <a data-theme="light" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">亮色主题</a>
         <a data-theme="dark" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">暗黑主题</a>
@@ -62,6 +62,7 @@
                 // pathNamespaces: ['/', '/about']
             },
             plugins: [
+                // 标题持久化插件（保留）
                 function persistTitle(hook, vm) {
                     var titleElm = document.querySelector('title');
                     var rootTitle = titleElm && titleElm.textContent;
@@ -74,51 +75,47 @@
                             titleElm.textContent = newTitle;
                         });
                     }
+                },
+                // 主题切换插件（核心：用docsify的hook确保DOM加载完成）
+                function themeTogglePlugin(hook, vm) {
+                    // docsify初始化完成后执行（关键：避免DOM未加载）
+                    hook.ready(function () {
+                        // 1. 找到切换容器和所有带title的样式表（只切换自定义主题）
+                        var preview = Docsify.dom.find('.theme-preview');
+                        var themes = Docsify.dom.findAll('[rel="stylesheet"][title]'); // 只筛选带title的样式表
+
+                        // 2. 初始化主题：读取本地存储
+                        const initTheme = () => {
+                            const savedTheme = localStorage.getItem('docsify-theme') || 'light';
+                            themes.forEach(function (theme) {
+                                theme.disabled = theme.title !== savedTheme;
+                            });
+                        };
+
+                        // 3. 点击切换逻辑
+                        preview.onclick = function (e) {
+                            var targetTheme = e.target.getAttribute('data-theme');
+                            if (!targetTheme) return; // 点击非a标签则退出
+
+                            // 启用目标主题，禁用其他
+                            themes.forEach(function (theme) {
+                                theme.disabled = theme.title !== targetTheme;
+                            });
+
+                            // 保存到本地存储
+                            localStorage.setItem('docsify-theme', targetTheme);
+                            // 实时更新按钮文字颜色（可选）
+                            e.target.style.color = targetTheme === 'dark' ? '#e9a182' : '#db785c';
+                        };
+
+                        // 初始化主题
+                        initTheme();
+                    });
                 }
-            ],
+            ]
         }
+
     </script>
-
-    <!-- 主题切换核心脚本（改造版） -->
-    <script>
-        // 等待页面加载完成
-        document.addEventListener('DOMContentLoaded', function () {
-            // 1. 找到切换容器和所有样式表
-            var preview = Docsify.dom.find('.demo-theme-preview');
-            var themes = Docsify.dom.findAll('[rel="stylesheet"]');
-
-            // 2. 初始化主题：读取本地存储，无则默认亮色
-            const initTheme = () => {
-                const savedTheme = localStorage.getItem('docsify-theme') || 'light';
-                // 启用保存的主题，禁用其他
-                themes.forEach(function (theme) {
-                    if (theme.title) { // 只处理有title的自定义主题（跳过字体/基础布局）
-                        theme.disabled = theme.title !== savedTheme;
-                    }
-                });
-            };
-
-            // 3. 点击切换逻辑
-            preview.onclick = function (e) {
-                var targetTheme = e.target.getAttribute('data-theme');
-                if (!targetTheme) return; // 点击非a标签则退出
-
-                // 启用目标主题，禁用其他
-                themes.forEach(function (theme) {
-                    if (theme.title) {
-                        theme.disabled = theme.title !== targetTheme;
-                    }
-                });
-
-                // 保存到本地存储（持久化）
-                localStorage.setItem('docsify-theme', targetTheme);
-            };
-
-            // 初始化主题
-            initTheme();
-        });
-    </script>
-
     <!-- docsify 核心脚本 -->
     <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 

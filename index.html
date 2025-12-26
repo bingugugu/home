@@ -18,15 +18,22 @@
 
     <!-- docsify 核心样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css" title="Dark">
     <!-- 2. 后加载自定义 CSS 文件（核心！） -->
     <!-- <link rel="stylesheet" href="css/scheme-SunsetAncientBuilding.css"> -->
-    <link rel="stylesheet" href="css/scheme-UnderCapital.css">
+    <link rel="stylesheet" href="css/scheme-UnderCapitalLight.css" title="light">
+    <link rel="stylesheet" href="css/scheme-UnderCapitalDark.css" title="dark">
     <link rel="stylesheet" href="css/layout.css">
 
 </head>
 
 <body>
+    <!-- 主题切换按钮 -->
+    <div class="demo-theme-preview"
+        style="position: fixed; top: 10px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
+        <a data-theme="light" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">亮色主题</a>
+        <a data-theme="dark" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">暗黑主题</a>
+    </div>
+
     <!-- 页面挂载点 -->
     <div id="app">拯救世界中···</div>
 
@@ -70,6 +77,46 @@
                 }
             ],
         }
+    </script>
+
+    <!-- 主题切换核心脚本（改造版） -->
+    <script>
+        // 等待页面加载完成
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. 找到切换容器和所有样式表
+            var preview = Docsify.dom.find('.demo-theme-preview');
+            var themes = Docsify.dom.findAll('[rel="stylesheet"]');
+
+            // 2. 初始化主题：读取本地存储，无则默认亮色
+            const initTheme = () => {
+                const savedTheme = localStorage.getItem('docsify-theme') || 'light';
+                // 启用保存的主题，禁用其他
+                themes.forEach(function (theme) {
+                    if (theme.title) { // 只处理有title的自定义主题（跳过字体/基础布局）
+                        theme.disabled = theme.title !== savedTheme;
+                    }
+                });
+            };
+
+            // 3. 点击切换逻辑
+            preview.onclick = function (e) {
+                var targetTheme = e.target.getAttribute('data-theme');
+                if (!targetTheme) return; // 点击非a标签则退出
+
+                // 启用目标主题，禁用其他
+                themes.forEach(function (theme) {
+                    if (theme.title) {
+                        theme.disabled = theme.title !== targetTheme;
+                    }
+                });
+
+                // 保存到本地存储（持久化）
+                localStorage.setItem('docsify-theme', targetTheme);
+            };
+
+            // 初始化主题
+            initTheme();
+        });
     </script>
 
     <!-- docsify 核心脚本 -->

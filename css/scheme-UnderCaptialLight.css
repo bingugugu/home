@@ -1,0 +1,250 @@
+/* ========== 亮色主题：珊瑚朱+铜器青 核心变量 ========== */
+:root {
+  /* ethicalAds 变量 */
+  --ea-background: #fff5f0;
+  --ea-border-color: rgba(130, 78, 64, 0.2);
+  --ea-border-radius: 6px;
+  --ea-callout-background: rgba(233, 161, 130, 0.3);
+  --ea-callout-color: inherit;
+  --ea-callout-font-size: 10px;
+  --ea-color: #283f3e;
+  --ea-font-size: 12px;
+  --ea-line-height: 1.5;
+  --ea-margin: 1em;
+  --ea-sidebar-inset: 300px;
+  --ea-sidebar-toggle-inset: 45px;
+  --ea-strong-color: #db785c;
+
+  /* 全局变量 */
+  --main-color: #db785c;
+  --main-color-hover: #c8694d;
+  --text-color: #283f3e;
+  --text-color-secondary: #824e40;
+  --bg-color: #fffbf9;
+  --sidebar-bg: #ffffff;
+  --sidebar-nav-active-bg: rgba(233, 161, 130, 0.25);
+  --navbar-bg: #ffffff;
+  --border-color: #824e40;
+  --border-color-light: rgba(130, 78, 64, 0.15);
+
+  /* 代码块变量 */
+  --code-bg: #fff5f0;
+  --code-text-color: #283f3e;
+  --code-border-color: #824e40;
+  --inline-code-bg: rgba(233, 161, 130, 0.35);
+  --inline-code-color: #283f3e;
+
+  /* 字体变量 */
+  --font-sans: 'Google Sans Code', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'Google Sans Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* ========== 通用样式（亮色/暗黑共用，只写一次） ========== */
+/* 全局基础 */
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* 标题样式 */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color-light);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+h1 {
+  border-bottom-color: var(--border-color);
+  font-size: 26px;
+  color: var(--main-color);
+}
+h2 {
+  font-size: 22px;
+}
+h3 {
+  font-size: 18px;
+}
+
+/* 顶部导航 */
+.app-nav {
+  border-bottom: 1px solid var(--border-color-light);
+  padding: 8px 0;
+}
+.app-nav li a {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  margin: 0 8px;
+}
+.app-nav li a:hover,
+.app-nav li a.active {
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+  text-decoration: none;
+}
+
+/* 侧边栏 */
+.sidebar {
+  border-right: 1px solid var(--border-color-light);
+  background-color: var(--sidebar-bg);
+}
+.sidebar-nav li a {
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  padding: 6px 12px;
+}
+.sidebar-nav li.active > a {
+  color: var(--main-color) !important;
+  background-color: var(--sidebar-nav-active-bg) !important;
+  border-left: 3px solid var(--main-color);
+  padding-left: 9px;
+}
+.sidebar-toggle {
+  color: var(--text-color-secondary) !important;
+  font-size: 16px;
+}
+.sidebar-toggle:hover {
+  color: var(--main-color) !important;
+}
+
+/* 正文与链接 */
+a {
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+a:hover {
+  color: var(--main-color-hover);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+p, ul, ol {
+  margin-bottom: 16px;
+}
+blockquote {
+  border-left: 4px solid var(--main-color);
+  padding: 10px 16px;
+  background-color: rgba(233, 161, 130, 0.1);
+  color: var(--text-color-secondary);
+}
+
+/* 代码块 */
+pre > code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text-color) !important;
+  border: 1px solid var(--code-border-color);
+  border-radius: 6px;
+  padding: 16px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+code {
+  background-color: var(--inline-code-bg) !important;
+  color: var(--inline-code-color) !important;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono) !important;
+  font-size: 14px;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-color-secondary);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  .sidebar-nav li a {
+    padding: 4px 8px;
+  }
+  pre > code {
+    padding: 12px !important;
+    font-size: 13px;
+  }
+  .sidebar {
+    --ea-margin: 1em 8px;
+  }
+  [data-ea-style="fixedfooter"][class] .ea-placement[class] {
+    left: 0;
+    padding-left: 0;
+  }
+}
+
+/* ========== ethicalAds 亮色样式 ========== */
+:root:where(.themeable) {
+  --ea-sidebar-inset: var(--sidebar-width);
+  --ea-sidebar-toggle-inset: 0;
+  --ea-background: #fff5f0;
+  --ea-callout-background: #f8d4c5;
+  --ea-margin: 1em 0 0 0;
+}
+
+[data-ea-publisher][class] {
+  position: relative;
+  margin: var(--ea-margin);
+  border-radius: var(--ea-border-radius);
+  line-height: var(--ea-line-height);
+  vertical-align: top;
+  font-family: var(--font-sans);
+}
+[data-ea-publisher][class] a,
+[data-ea-publisher][class] a :not(strong) {
+  font-weight: normal;
+  color: var(--ea-color);
+}
+[data-ea-publisher][class] .ea-placement[class] {
+  font-size: var(--ea-font-size);
+  font-family: var(--font-sans);
+}
+[data-ea-publisher][class] .ea-placement[class] .ea-content {
+  margin: 0 0 0.5em 0;
+  border-color: var(--ea-border-color);
+  border-radius: var(--ea-border-radius);
+  background: var(--ea-background);
+  color: inherit;
+}
+[data-ea-publisher][class] .ea-placement[class] .ea-content a {
+  color: var(--ea-color);
+}
+[data-ea-publisher][class] .ea-placement[class] .ea-content a strong {
+  color: var(--ea-strong-color);
+  font-weight: 500;
+}
+/* 其他ethicalAds通用样式（和之前一致，保留） */
+.sidebar [data-ea-publisher][class] {
+  --ea-margin: 1em 15px;
+  display: block;
+  position: relative;
+  order: 1;
+}
+.sidebar [data-ea-publisher][class].flat {
+  --ea-margin: 1em 0;
+}

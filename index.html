@@ -18,8 +18,10 @@
 
     <!-- docsify 核心样式 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css" title="Dark">
     <!-- 2. 后加载自定义 CSS 文件（核心！） -->
-    <link rel="stylesheet" href="css/scheme-SunsetAncientBuilding.css">
+    <!-- <link rel="stylesheet" href="css/scheme-SunsetAncientBuilding.css"> -->
+    <link rel="stylesheet" href="css/scheme-UnderCapital.css">
     <link rel="stylesheet" href="css/layout.css">
 
 </head>
@@ -52,6 +54,21 @@
                 namespace: 'website-1',
                 // pathNamespaces: ['/', '/about']
             },
+            plugins: [
+                function persistTitle(hook, vm) {
+                    var titleElm = document.querySelector('title');
+                    var rootTitle = titleElm && titleElm.textContent;
+                    var pageTitlePrefix = window.$docsify.name ? window.$docsify.name + ' - ' : '';
+                    if (rootTitle) {
+                        hook.doneEach(function () {
+                            var currentTitle = titleElm.textContent;
+                            var isRoot = /^#\/?$/.test(location.hash);
+                            var newTitle = isRoot ? rootTitle : pageTitlePrefix + currentTitle;
+                            titleElm.textContent = newTitle;
+                        });
+                    }
+                }
+            ],
         }
     </script>
 

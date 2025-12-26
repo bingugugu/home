@@ -1,0 +1,536 @@
+/* ========== 核心变量定义（优先覆盖 ethicalAds + 全局配色） ========== */
+:root {
+    /* 1. ethicalAds 专属变量（核心替换） */
+    --ea-background: #fff5f0;
+    /* 广告背景：藏花红暖调浅白 */
+    --ea-border-color: rgba(130, 78, 64, 0.2);
+    /* 广告边框：淡土棕浅透 */
+    --ea-border-radius: 6px;
+    /* 优化圆角，更贴合复古风格 */
+    --ea-callout-background: rgba(233, 161, 130, 0.3);
+    /* 广告标注背景：藏花红半透 */
+    --ea-callout-color: inherit;
+    --ea-callout-font-size: 10px;
+    --ea-color: #283f3e;
+    /* 广告文字：铜器青 */
+    --ea-font-size: 12px;
+    --ea-line-height: 1.5;
+    /* 优化行高，适配中文 */
+    --ea-margin: 1em;
+    --ea-sidebar-inset: 300px;
+    --ea-sidebar-toggle-inset: 45px;
+    --ea-strong-color: #db785c;
+    /* 广告强调色：珊瑚朱（主色） */
+
+    /* 2. ethicalAds 暗黑模式变量 */
+    --ea-dark-background: #1a2322;
+    /* 暗黑广告背景：铜器青加深 */
+    --ea-dark-border-color: rgba(130, 78, 64, 0.4);
+    /* 暗黑边框：淡土棕加深 */
+    --ea-dark-callout-background: rgba(130, 78, 64, 0.3);
+    /* 暗黑标注背景：淡土棕半透 */
+    --ea-dark-callout-color: inherit;
+    --ea-dark-color: #e9a182;
+    /* 暗黑广告文字：藏花红 */
+    --ea-dark-strong-color: #e9a182;
+    /* 暗黑广告强调色：藏花红 */
+
+    /* 3. 全局配色变量（docsify 主体） */
+    --main-color: #db785c;
+    /* 主色：珊瑚朱 */
+    --main-color-hover: #c8694d;
+    /* 珊瑚朱加深 */
+    --text-color: #283f3e;
+    /* 正文文字：铜器青 */
+    --text-color-secondary: #824e40;
+    /* 次要文字：淡土棕 */
+    --bg-color: #fffbf9;
+    /* 页面背景：暖白+藏花红调 */
+    --sidebar-bg: #ffffff;
+    /* 侧边栏背景 */
+    --sidebar-nav-active-bg: rgba(233, 161, 130, 0.25);
+    /* 侧边栏选中背景：藏花红半透 */
+    --navbar-bg: #ffffff;
+    /* 导航栏背景 */
+    --border-color: #824e40;
+    /* 全局边框：淡土棕 */
+    --border-color-light: rgba(130, 78, 64, 0.15);
+    /* 淡土棕浅透 */
+
+    /* 4. 代码块变量 */
+    --code-bg: #fff5f0;
+    /* 代码背景：藏花红暖调 */
+    --code-text-color: #283f3e;
+    /* 代码文字：铜器青 */
+    --code-border-color: #824e40;
+    /* 代码边框：淡土棕 */
+    --inline-code-bg: rgba(233, 161, 130, 0.35);
+    /* 行内代码背景：藏花红半透 */
+    --inline-code-color: #283f3e;
+    /* 行内代码文字：铜器青 */
+
+    /* 5. 字体变量（Google Sans Code） */
+    --font-sans: 'Google Sans Code', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'Google Sans Code', 'Consolas', 'Monaco', monospace;
+}
+
+/* ========== Docsify Themeable 适配 ========== */
+:root:where(.themeable) {
+    --ea-sidebar-inset: var(--sidebar-width);
+    --ea-sidebar-toggle-inset: 0;
+    /* Themeable 侧边栏变量覆盖 */
+    --ea-background: hsl(from #e9a182 h s 94%);
+    /* 适配 themeable 色调计算 */
+    --ea-callout-background: hsl(from #e9a182 h s 89%);
+    --ea-margin: 1em 0 0 0;
+}
+
+/* ========== 暗黑模式全局变量覆盖 ========== */
+.dark,
+[data-theme="dark"] {
+    /* 1. 全局暗黑变量 */
+    --main-color: #e9a182;
+    --main-color-hover: #db785c;
+    --text-color: #e9a182;
+    --text-color-secondary: #824e40;
+    --bg-color: #1a2322;
+    --sidebar-bg: #141c1b;
+    --sidebar-nav-active-bg: rgba(130, 78, 64, 0.3);
+    --navbar-bg: #141c1b;
+    --border-color: #824e40;
+    --border-color-light: rgba(130, 78, 64, 0.3);
+
+    /* 2. 代码块暗黑变量 */
+    --code-bg: #1f2928;
+    --code-text-color: #e9a182;
+    --code-border-color: rgba(130, 78, 64, 0.4);
+    --inline-code-bg: rgba(219, 120, 92, 0.2);
+
+    /* 3. ethicalAds 暗黑变量（优先级覆盖） */
+    --ea-background: var(--ea-dark-background);
+    --ea-border-color: var(--ea-dark-border-color);
+    --ea-callout-background: var(--ea-dark-callout-background);
+    --ea-callout-color: var(--ea-dark-callout-color);
+    --ea-color: var(--ea-dark-color);
+    --ea-strong-color: var(--ea-dark-strong-color);
+}
+
+/* ========== 自适应暗黑模式（系统偏好） ========== */
+@media (prefers-color-scheme: dark) {
+    [data-ea-publisher][class].adaptive {
+        --ea-background: var(--ea-dark-background);
+        --ea-border-color: var(--ea-dark-border-color);
+        --ea-callout-background: var(--ea-dark-callout-background);
+        --ea-callout-color: var(--ea-dark-callout-color);
+        --ea-color: var(--ea-dark-color);
+        --ea-strong-color: var(--ea-dark-strong-color);
+    }
+}
+
+/* ========== ethicalAds 原有样式（保留结构，适配新变量） ========== */
+/* Global */
+[data-ea-publisher][class] {
+    position: relative;
+    margin: var(--ea-margin);
+    border-radius: var(--ea-border-radius);
+    line-height: var(--ea-line-height);
+    vertical-align: top;
+    font-family: var(--font-sans);
+    /* 统一字体 */
+}
+
+[data-ea-publisher][class] a,
+[data-ea-publisher][class] a :not(strong) {
+    font-weight: normal;
+    color: var(--ea-color);
+}
+
+[data-ea-publisher][class] .ea-placement[class] {
+    font-size: var(--ea-font-size);
+    font-family: var(--font-sans);
+}
+
+[data-ea-publisher][class] .ea-placement[class] .ea-content {
+    margin: 0 0 0.5em 0;
+    border-color: var(--ea-border-color);
+    border-radius: var(--ea-border-radius);
+    background: var(--ea-background);
+    color: inherit;
+}
+
+[data-ea-publisher][class] .ea-placement[class] .ea-content a {
+    color: var(--ea-color);
+}
+
+[data-ea-publisher][class] .ea-placement[class] .ea-content a strong {
+    color: var(--ea-strong-color);
+    font-weight: 500;
+}
+
+[data-ea-publisher][class] .ea-placement[class] .ea-callout {
+    margin: 0;
+    font-family: var(--font-sans);
+}
+
+[data-ea-publisher][class] .ea-placement[class] .ea-callout a {
+    font-style: normal;
+    font-size: var(--ea-callout-font-size);
+    color: var(--ea-callout-color);
+}
+
+/* Global - Image Ad */
+[data-ea-type][class] .ea-type-image .ea-content>a>img {
+    display: block;
+    margin: auto;
+    border-radius: calc(var(--ea-border-radius) / 2);
+}
+
+[data-ea-type][class].horizontal .ea-type-image .ea-content>a>img {
+    margin-right: 1em;
+}
+
+/* Global - Contained Callout  */
+.sidebar [data-ea-publisher][class] .ea-placement[class],
+[data-ea-style="stickybox"] .ea-placement[class] {
+    color: var(--ea-color);
+}
+
+.sidebar [data-ea-publisher][class] .ea-placement[class] .ea-content,
+[data-ea-style="stickybox"] .ea-placement.ea-type-image[class] .ea-content {
+    margin: 0;
+    padding-bottom: 2.75em;
+}
+
+.sidebar [data-ea-publisher][class] .ea-placement[class] .ea-callout,
+[data-ea-style="stickybox"] .ea-placement[class] .ea-callout {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    padding: 0.15em 1em 0.25em;
+    border-top-left-radius: var(--ea-border-radius);
+    border-bottom-right-radius: var(--ea-border-radius);
+    background: var(--ea-callout-background);
+    color: var(--ea-color);
+}
+
+.sidebar [data-ea-publisher].bordered .ea-placement[class] .ea-callout,
+[data-ea-style="stickybox"].bordered .ea-placement[class] .ea-callout {
+    bottom: 1px;
+    right: 1px;
+}
+
+/* Style: Fixed Footer */
+[data-ea-style="fixedfooter"][class] .ea-placement[class] {
+    right: 0;
+    left: var(--ea-sidebar-inset);
+    width: auto;
+    padding-left: 0;
+    background: var(--ea-background);
+    transition: all 250ms;
+}
+
+[data-ea-style="fixedfooter"][class].bordered .ea-placement[class] {
+    border-top: 1px solid var(--ea-border-color);
+}
+
+[data-ea-style="fixedfooter"][class] .ea-placement[class] .ea-content {
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+}
+
+[data-ea-style="fixedfooter"][class] .ea-placement[class] .ea-fixedfooter-hide {
+    color: var(--ea-color);
+}
+
+[data-ea-style="fixedfooter"][class] .ea-placement[class] .ea-fixedfooter-hide span {
+    border-color: var(--ea-color);
+}
+
+body.close [data-ea-style="fixedfooter"][class] .ea-placement[class] {
+    left: 0;
+    padding-left: var(--ea-sidebar-toggle-inset);
+}
+
+/* Style: Stickybox */
+[data-ea-style="stickybox"] .ea-placement[class] .ea-stickybox-hide {
+    top: 0px;
+    right: 0px;
+    height: 20px;
+    width: 20px;
+    border: none;
+    border-radius: 0 calc(var(--ea-border-radius) / 2) 0 calc(var(--ea-border-radius) / 2);
+    background: var(--ea-callout-background);
+    color: var(--ea-color);
+    font-size: 16px;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+[data-ea-style="stickybox"].bordered .ea-placement[class] .ea-stickybox-hide {
+    top: 1px;
+    right: 1px;
+}
+
+/* Scoped: Sidebar */
+.sidebar {
+    --ea-margin: 1em 15px;
+}
+
+.sidebar [data-ea-publisher][class] {
+    display: block;
+    position: relative;
+    order: 1;
+}
+
+.sidebar [data-ea-publisher][class].flat {
+    --ea-margin: 1em 0;
+}
+
+.sidebar .ea-placement[class] {
+    display: block;
+}
+
+.sidebar .ea-placement[class] .ea-content {
+    max-width: none;
+}
+
+.sidebar [data-ea-publisher][class].flat .ea-content {
+    border-radius: 0;
+}
+
+.sidebar [data-ea-publisher][class].flat.horizontal .ea-content>a>img {
+    border-radius: 0;
+}
+
+.sidebar [data-ea-publisher][class].flat .ea-placement[class] .ea-callout {
+    border-bottom-right-radius: 0;
+}
+
+/* Docsify Themeable Sidebar 适配 */
+:where(.themeable) .sidebar {
+    --ea-background: #fff5f0;
+    /* 替换为藏花红调，适配 themeable */
+    --ea-callout-background: #f8d4c5;
+    --ea-margin: 1em 0 0 0;
+}
+
+:where(.themeable) .sidebar [data-ea-publisher][class].flat {
+    --ea-margin: 0 -25px;
+}
+
+/* Scoped: Sidebar - Image Ad */
+.sidebar .horizontal .ea-type-image {
+    display: block;
+}
+
+.sidebar .horizontal .ea-type-image .ea-content {
+    padding-top: 0;
+    padding-left: 0;
+}
+
+.sidebar .horizontal .ea-type-image .ea-content>a>img {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.sidebar .horizontal .ea-type-image .ea-content .ea-text {
+    margin-top: 0.5em;
+}
+
+/* Scoped: Sidebar - Text Ad */
+.sidebar .ea-type-text .ea-content {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/* ========== Docsify 全局样式（主体+导航+正文） ========== */
+/* 全局基础 */
+body {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* 标题样式 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color-light);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+}
+
+h1 {
+    border-bottom-color: var(--border-color);
+    font-size: 26px;
+    color: var(--main-color);
+    /* 一级标题用珊瑚朱 */
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+/* 顶部导航 */
+.app-nav {
+    border-bottom: 1px solid var(--border-color-light);
+    padding: 8px 0;
+}
+
+.app-nav li a {
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    margin: 0 8px;
+}
+
+.app-nav li a:hover,
+.app-nav li a.active {
+    color: var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+    text-decoration: none;
+}
+
+/* 侧边栏 */
+.sidebar {
+    border-right: 1px solid var(--border-color-light);
+    background-color: var(--sidebar-bg);
+}
+
+.sidebar-nav li a {
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    padding: 6px 12px;
+}
+
+.sidebar-nav li.active>a {
+    color: var(--main-color) !important;
+    background-color: var(--sidebar-nav-active-bg) !important;
+    border-left: 3px solid var(--main-color);
+    padding-left: 9px;
+}
+
+.sidebar-toggle {
+    color: var(--text-color-secondary) !important;
+    font-size: 16px;
+}
+
+.sidebar-toggle:hover {
+    color: var(--main-color) !important;
+}
+
+/* 正文与链接 */
+a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--main-color-hover);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+p,
+ul,
+ol {
+    margin-bottom: 16px;
+}
+
+blockquote {
+    border-left: 4px solid var(--main-color);
+    padding: 10px 16px;
+    background-color: rgba(233, 161, 130, 0.1);
+    color: var(--text-color-secondary);
+}
+
+/* 代码块 */
+pre>code {
+    background-color: var(--code-bg) !important;
+    color: var(--code-text-color) !important;
+    border: 1px solid var(--code-border-color);
+    border-radius: 6px;
+    padding: 16px !important;
+    font-family: var(--font-mono) !important;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+code {
+    background-color: var(--inline-code-bg) !important;
+    color: var(--inline-code-color) !important;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: var(--font-mono) !important;
+    font-size: 14px;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-color-secondary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--main-color);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .sidebar-nav li a {
+        padding: 4px 8px;
+    }
+
+    pre>code {
+        padding: 12px !important;
+        font-size: 13px;
+    }
+
+    /* 移动端广告适配 */
+    .sidebar {
+        --ea-margin: 1em 8px;
+    }
+
+    [data-ea-style="fixedfooter"][class] .ea-placement[class] {
+        left: 0;
+        padding-left: 0;
+    }
+}

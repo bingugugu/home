@@ -30,35 +30,10 @@
             cursor: pointer;
         }
     </style>
-    <style>
-        button {
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
 
-        button1 {
-            background-color: #cfff4b;
-        }
-
-        /* 绿色 */
-        button2 {
-            background-color: #a7d8e9;
-        }
-
-        /* 蓝色 */
-    </style>
 </head>
 
 <body>
-    <button class="button button1" id="theme-toggle" onclick="toggleTheme()">切换主题</button>
-    <button class="button button2" id="up-top" onclick="upTop()">返回顶部</button>
     <!-- 加载对话框 -->
     <div id="app"> 拯救世界中··· </div>
     <script>
@@ -123,29 +98,6 @@
     <script src="//unpkg.com/prismjs@1.27.0/components/prism-sql.min.js"></script>
     <script src="//unpkg.com/prismjs@1.27.0/components/prism-xml-doc.min.js"></script>
     <script src="//unpkg.com/prismjs@1.27.0/components/prism-yaml.min.js"></script>
-
-    <!-- Custom JavaScript functions -->
-    <script>
-        // Toggle between light and dark themes
-        function toggleTheme() {
-            const themeLinks = document.querySelectorAll('link[rel="stylesheet"]');
-            themeLinks.forEach(link => {
-                if (link.getAttribute('media') === '(prefers-color-scheme: light)') {
-                    link.setAttribute('media', link.getAttribute('media') === 'all' ? '(prefers-color-scheme: light)' : 'all');
-                } else if (link.getAttribute('media') === '(prefers-color-scheme: dark)') {
-                    link.setAttribute('media', link.getAttribute('media') === 'all' ? '(prefers-color-scheme: dark)' : 'all');
-                }
-            });
-        }
-
-        // Scroll to top of the page
-        function upTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-    </script>
 
 </body>
 

@@ -122,13 +122,24 @@
                         // ------------------------
                         const themes = Docsify.dom.findAll('[rel="stylesheet"][title]'); // 筛选带title的样式表
                         const toggleBtn = Docsify.dom.find('#theme-toggle');
+                        const htmlElement = document.documentElement;
 
                         // 初始化主题：读取本地存储
                         const initTheme = () => {
                             const savedTheme = localStorage.getItem('docsify-theme') || 'light';
+                            
+                            // 更新CSS主题
                             themes.forEach(function (theme) {
                                 theme.disabled = theme.title !== savedTheme;
                             });
+                            
+                            // 更新data-theme属性
+                            htmlElement.setAttribute('data-theme', savedTheme);
+                            
+                            // 更新按钮图标
+                            if (toggleBtn) {
+                                toggleBtn.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+                            }
                         };
 
                         // 点击切换逻辑
@@ -149,6 +160,12 @@
                                 themes.forEach(function (theme) {
                                     theme.disabled = theme.title !== newTheme;
                                 });
+                                
+                                // 更新data-theme属性
+                                htmlElement.setAttribute('data-theme', newTheme);
+                                
+                                // 更新按钮图标
+                                toggleBtn.textContent = newTheme === 'light' ? '🌙' : '☀️';
 
                                 // 保存到本地存储
                                 localStorage.setItem('docsify-theme', newTheme);
@@ -189,6 +206,24 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
 
+    <!-- mermaid 流程图支持 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#2196F3',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#7C007C',
+                lineColor: '#F8B229',
+                secondaryColor: '#006100',
+                tertiaryColor: '#fff'
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-mermaid@2.1.0/dist/docsify-mermaid.js"></script>
+
     <!-- code highlight -->
     <script src="//unpkg.com/prismjs@1.27.0/components/prism-bash.min.js"></script>
     <script src="//unpkg.com/prismjs@1.27.0/components/prism-csharp.min.js"></script>
@@ -205,8 +240,61 @@
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script> -->
 
-    <!-- 数学公式支持（按需） -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/docsify-katex@1/dist/docsify-katex.min.js"></script> -->
+    <!-- 数学公式支持 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify-katex@1/dist/docsify-katex.min.js"></script>
+
+    <!-- Giscus 评论系统支持 -->
+    <script src="https://giscus.app/client.js" 
+            data-repo="your-username/your-repo" 
+            data-repo-id="your-repo-id" 
+            data-category="Announcements" 
+            data-category-id="your-category-id" 
+            data-mapping="pathname" 
+            data-strict="0" 
+            data-reactions-enabled="1" 
+            data-emit-metadata="0" 
+            data-input-position="bottom" 
+            data-theme="light" 
+            data-lang="zh-CN" 
+            crossorigin="anonymous" 
+            async>
+    </script>
+
+    <!-- 动态切换Giscus主题 -->
+    <script>
+        // 监听主题变化，同步更新Giscus主题
+        const updateGiscusTheme = () => {
+            const theme = localStorage.getItem('docsify-theme') || 'light';
+            const giscusTheme = theme === 'light' ? 'light' : 'dark';
+            
+            // 更新所有giscus iframe的主题
+            const iframes = document.querySelectorAll('iframe.giscus-frame');
+            iframes.forEach(iframe => {
+                iframe.contentWindow.postMessage({
+                    giscus: {
+                        setConfig: {
+                            theme: giscusTheme
+                        }
+                    }
+                }, 'https://giscus.app');
+            });
+        };
+
+        // 初始化时更新主题
+        window.addEventListener('load', updateGiscusTheme);
+        
+        // 监听主题切换事件
+        document.addEventListener('themechange', updateGiscusTheme);
+        
+        // 为主题切换按钮添加事件监听
+        const toggleBtn = document.querySelector('#theme-toggle');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', updateGiscusTheme);
+        }
+    </script>
 </body>
 
 </html>

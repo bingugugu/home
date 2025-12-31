@@ -1,4 +1,4 @@
-/* Fluid Theme for Docsify - 严格参考 hexo fluid 主题设计 */
+/* Hexo Fluid Theme for Docsify - 严格参考 hexo fluid 主题设计 */
 
 /* 重置默认样式 */
 * {
@@ -7,95 +7,29 @@
   padding: 0;
 }
 
-/* 主题颜色变量 */
-:root {
-  /* 主色调 */
-  --primary: #409eff;
-  --primary-light: #79bbff;
-  --primary-dark: #337ecc;
-  --primary-lighter: #ecf5ff;
-  
-  /* 辅助色 */
-  --success: #67c23a;
-  --warning: #e6a23c;
-  --danger: #f56c6c;
-  --info: #909399;
-  
-  /* 中性色 */
-  --bg: #f8f9fa;
-  --bg-secondary: #f5f7fa;
-  --bg-tertiary: #ffffff;
-  --text-primary: #303133;
-  --text-secondary: #606266;
-  --text-tertiary: #909399;
-  --border: #e4e7ed;
-  --divider: #ebeef5;
-  --shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.08);
-  --shadow-hover: 0 4px 16px 0 rgba(0, 0, 0, 0.12);
-  
-  /* 代码块 */
-  --code-bg: #f6f8fa;
-  --code-block-bg: #1e1e1e;
-  --code-color: #24292e;
-  
-  /* 圆角 */
-  --border-radius: 8px;
-  --border-radius-lg: 12px;
-  
-  /* 过渡 */
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* 暗色主题 */
-[data-theme="dark"] {
-  --bg: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-tertiary: #242424;
-  --text-primary: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --text-tertiary: #808080;
-  --border: #3a3a3a;
-  --divider: #3a3a3a;
-  --shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
-  --shadow-hover: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
-  
-  /* 暗色主题代码块 */
-  --code-bg: #2d2d2d;
-  --code-color: #e0e0e0;
-}
-
-/* 结合 docsify 原有属性 */
-:root {
-  --theme-color: var(--primary);
-  --sidebar-width: 260px;
-  --content-max-width: 900px;
-}
-
 /* 全局样式 */
 body {
-  background-color: var(--bg) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
   overflow-x: hidden;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 /* 页面容器 */
-.app-container {
-  background-color: var(--bg) !important;
-  display: flex;
-  min-height: 100vh;
+#app {
+  background-color: var(--bg-color) !important;
 }
 
-/* 侧边栏 */
+/* 侧边栏样式 */
 .sidebar {
-  background-color: var(--bg-tertiary) !important;
-  border-right: 1px solid var(--divider) !important;
+  background-color: var(--sidebar-bg-color) !important;
+  border-right: 1px solid var(--sidebar-border-color) !important;
   box-shadow: none !important;
   padding: 0 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   width: var(--sidebar-width) !important;
   position: fixed !important;
   top: 0 !important;
@@ -105,35 +39,31 @@ body {
   z-index: 99;
 }
 
-.sidebar-nav {
-  padding: 1rem 0 !important;
-}
-
 /* 侧边栏标题 */
 .sidebar-nav > ul > li > a {
-  color: var(--text-primary) !important;
+  color: var(--sidebar-text-color) !important;
   font-weight: 600 !important;
   font-size: 0.95rem !important;
   padding: 0.75rem 1.25rem !important;
   margin: 0 !important;
   display: block;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   border-radius: 0 !important;
   border-left: 3px solid transparent;
 }
 
 .sidebar-nav > ul > li > a:hover {
-  color: var(--primary) !important;
-  background-color: var(--primary-lighter) !important;
-  border-left-color: var(--primary);
+  color: var(--sidebar-nav-link-hover-color) !important;
+  background-color: var(--fluid-primary-lighter) !important;
+  border-left-color: var(--sidebar-nav-link-border-color);
 }
 
 /* 侧边栏激活状态 */
 .sidebar-nav .active > a {
-  color: var(--primary) !important;
-  background-color: var(--primary-lighter) !important;
+  color: var(--sidebar-nav-link-active-color) !important;
+  background-color: var(--fluid-primary-lighter) !important;
   font-weight: 600 !important;
-  border-left-color: var(--primary);
+  border-left-color: var(--sidebar-nav-link-border-color);
 }
 
 /* 侧边栏二级导航 */
@@ -143,19 +73,19 @@ body {
 }
 
 .sidebar-nav ul ul li a {
-  color: var(--text-secondary) !important;
+  color: var(--sidebar-nav-link-color) !important;
   font-size: 0.9rem !important;
   padding: 0.5rem 1.5rem !important;
   margin: 0 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   border-radius: 0 !important;
   border-left: 3px solid transparent;
 }
 
 .sidebar-nav ul ul li a:hover {
-  color: var(--primary) !important;
-  background-color: var(--primary-lighter) !important;
-  border-left-color: var(--primary);
+  color: var(--sidebar-nav-link-hover-color) !important;
+  background-color: var(--fluid-primary-lighter) !important;
+  border-left-color: var(--sidebar-nav-link-border-color);
 }
 
 /* 侧边栏三级导航 */
@@ -165,74 +95,22 @@ body {
 }
 
 /* 主内容区域 */
-.app-main {
-  flex: 1;
-  margin-left: var(--sidebar-width) !important;
-  transition: var(--transition);
-}
-
-/* 顶部导航栏 */
-.app-nav {
-  background-color: var(--bg-tertiary) !important;
-  border-bottom: 1px solid var(--divider) !important;
-  box-shadow: none !important;
-  padding: 0.75rem 2rem !important;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: var(--transition);
-  margin: 0 !important;
-}
-
-.app-nav a {
-  color: var(--text-primary) !important;
-  font-weight: 500 !important;
-  margin: 0 1rem !important;
-  padding: 0.5rem 0 !important;
-  position: relative;
-  transition: var(--transition);
-  font-size: 0.95rem !important;
-}
-
-.app-nav a:hover {
-  color: var(--primary) !important;
-}
-
-/* 导航栏下划线效果 */
-.app-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary);
-  transition: var(--transition);
-}
-
-.app-nav a:hover::after {
-  width: 100%;
-}
-
-/* 内容区域 */
-.content {
-  background-color: var(--bg-tertiary) !important;
-  border-radius: var(--border-radius-lg) !important;
-  box-shadow: var(--shadow) !important;
+.markdown-section {
+  background-color: var(--content-bg-color) !important;
+  border-radius: var(--fluid-border-radius-lg) !important;
+  box-shadow: var(--fluid-shadow) !important;
   padding: 2rem !important;
   margin: 1rem !important;
   max-width: var(--content-max-width) !important;
   border: none !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
-/* 内容区域内边距优化 */
+/* 主内容区域内边距优化 */
 .markdown-section {
-  padding: 0 !important;
   line-height: 1.8 !important;
-  color: var(--text-primary) !important;
-  max-width: 800px !important;
-  margin: 0 auto !important;
+  color: var(--content-text-color) !important;
+  margin: 2rem auto !important;
 }
 
 /* 标题样式 */
@@ -242,25 +120,25 @@ body {
 .markdown-section h4,
 .markdown-section h5,
 .markdown-section h6 {
-  color: var(--text-primary) !important;
+  color: var(--heading-color) !important;
   font-weight: 600 !important;
   margin-top: 2rem !important;
   margin-bottom: 1rem !important;
   line-height: 1.4 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 .markdown-section h1 {
   font-size: 2rem !important;
   margin-top: 0 !important;
   padding-bottom: 0.5rem !important;
-  border-bottom: 1px solid var(--divider) !important;
+  border-bottom: 1px solid var(--fluid-divider) !important;
 }
 
 .markdown-section h2 {
   font-size: 1.75rem !important;
   padding-bottom: 0.5rem !important;
-  border-bottom: 1px solid var(--divider) !important;
+  border-bottom: 1px solid var(--fluid-divider) !important;
 }
 
 .markdown-section h3 {
@@ -269,23 +147,23 @@ body {
 
 /* 段落样式 */
 .markdown-section p {
-  color: var(--text-secondary) !important;
+  color: var(--content-secondary-text-color) !important;
   font-size: 1rem !important;
   margin-bottom: 1rem !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   line-height: 1.8 !important;
 }
 
 /* 链接样式 */
 .markdown-section a {
-  color: var(--primary) !important;
+  color: var(--link-color) !important;
   text-decoration: none !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   position: relative;
 }
 
 .markdown-section a:hover {
-  color: var(--primary-dark) !important;
+  color: var(--link-hover-color) !important;
   text-decoration: none !important;
 }
 
@@ -297,8 +175,8 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background-color: var(--primary);
-  transition: var(--transition);
+  background-color: var(--link-color);
+  transition: var(--fluid-transition);
 }
 
 .markdown-section a:hover::after {
@@ -308,38 +186,38 @@ body {
 /* 列表样式 */
 .markdown-section ul,
 .markdown-section ol {
-  color: var(--text-secondary) !important;
+  color: var(--content-secondary-text-color) !important;
   margin-left: 1.5rem !important;
   margin-bottom: 1.5rem !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 .markdown-section li {
   margin-bottom: 0.5rem !important;
   line-height: 1.7 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 /* 引用样式 */
 .markdown-section blockquote {
-  border-left: 4px solid var(--primary) !important;
+  border-left: 4px solid var(--blockquote-border-color) !important;
   padding: 1rem 1.5rem !important;
   margin: 1.5rem 0 !important;
-  background-color: var(--primary-lighter) !important;
-  color: var(--text-secondary) !important;
+  background-color: var(--blockquote-bg-color) !important;
+  color: var(--blockquote-text-color) !important;
   font-style: normal !important;
   border-radius: 0 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 /* 代码块样式 */
 .markdown-section pre {
-  background-color: var(--code-block-bg) !important;
-  border-radius: var(--border-radius-lg) !important;
-  box-shadow: var(--shadow) !important;
+  background-color: var(--code-block-bg-color) !important;
+  border-radius: var(--fluid-border-radius-lg) !important;
+  box-shadow: var(--fluid-shadow) !important;
   padding: 1.5rem !important;
   margin: 1.5rem 0 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   position: relative;
   border: none !important;
 }
@@ -352,20 +230,20 @@ body {
 
 /* 内联代码样式 */
 .markdown-section code {
-  background-color: var(--code-bg) !important;
-  color: var(--primary) !important;
+  background-color: var(--code-bg-color) !important;
+  color: var(--code-text-color) !important;
   padding: 0.25rem 0.5rem !important;
-  border-radius: var(--border-radius) !important;
+  border-radius: var(--fluid-border-radius) !important;
   font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
   font-size: 0.9em !important;
   font-weight: 500 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 /* 代码块内代码样式 */
 .markdown-section pre > code {
   background-color: transparent !important;
-  color: var(--code-color) !important;
+  color: var(--code-block-text-color) !important;
   padding: 0 !important;
   border-radius: 0 !important;
   font-size: 0.9em !important;
@@ -377,29 +255,29 @@ body {
   width: 100% !important;
   border-collapse: collapse !important;
   margin: 1.5rem 0 !important;
-  background-color: var(--bg-tertiary) !important;
-  border-radius: var(--border-radius) !important;
+  background-color: var(--content-bg-color) !important;
+  border-radius: var(--fluid-border-radius) !important;
   overflow: hidden !important;
-  box-shadow: var(--shadow) !important;
-  transition: var(--transition);
+  box-shadow: var(--fluid-shadow) !important;
+  transition: var(--fluid-transition);
 }
 
 .markdown-section th {
-  background-color: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--table-header-bg-color) !important;
+  color: var(--table-header-text-color) !important;
   font-weight: 600 !important;
   padding: 1rem !important;
   text-align: left !important;
-  border-bottom: 1px solid var(--divider) !important;
-  transition: var(--transition);
+  border-bottom: 1px solid var(--table-border-color) !important;
+  transition: var(--fluid-transition);
 }
 
 .markdown-section td {
-  color: var(--text-secondary) !important;
+  color: var(--content-secondary-text-color) !important;
   padding: 1rem !important;
   text-align: left !important;
-  border-bottom: 1px solid var(--divider) !important;
-  transition: var(--transition);
+  border-bottom: 1px solid var(--table-border-color) !important;
+  transition: var(--fluid-transition);
 }
 
 .markdown-section tr:last-child td {
@@ -407,22 +285,22 @@ body {
 }
 
 .markdown-section tr:hover {
-  background-color: var(--bg-secondary) !important;
+  background-color: var(--table-row-hover-bg-color) !important;
 }
 
 /* 图片样式 */
 .markdown-section img {
   max-width: 100% !important;
   height: auto !important;
-  border-radius: var(--border-radius-lg) !important;
-  box-shadow: var(--shadow) !important;
+  border-radius: var(--image-border-radius) !important;
+  box-shadow: var(--image-shadow) !important;
   margin: 1.5rem 0 !important;
   display: block !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 .markdown-section img:hover {
-  box-shadow: var(--shadow-hover) !important;
+  box-shadow: var(--image-hover-shadow) !important;
   transform: translateY(-2px);
 }
 
@@ -430,30 +308,30 @@ body {
 .markdown-section hr {
   border: none !important;
   height: 1px !important;
-  background-color: var(--divider) !important;
+  background-color: var(--fluid-divider) !important;
   margin: 2rem 0 !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 /* 搜索框样式 */
 .search {
-  background-color: var(--bg-secondary) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--border-radius) !important;
+  background-color: var(--fluid-bg-secondary) !important;
+  border: 1px solid var(--fluid-border) !important;
+  border-radius: var(--fluid-border-radius) !important;
   box-shadow: none !important;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
   margin: 1rem !important;
 }
 
 .search:hover {
-  border-color: var(--primary-light) !important;
+  border-color: var(--fluid-primary-light) !important;
   box-shadow: none !important;
 }
 
 .search input {
   background-color: transparent !important;
   border: none !important;
-  color: var(--text-primary) !important;
+  color: var(--fluid-text-primary) !important;
   padding: 0.75rem 1rem !important;
   font-size: 1rem !important;
 }
@@ -465,12 +343,12 @@ body {
 /* 代码复制按钮样式 */
 .docsify-copy-code-button {
   background-color: rgba(64, 158, 255, 0.1) !important;
-  color: var(--primary) !important;
+  color: var(--fluid-primary) !important;
   border: 1px solid rgba(64, 158, 255, 0.2) !important;
-  border-radius: var(--border-radius) !important;
+  border-radius: var(--fluid-border-radius) !important;
   padding: 0.25rem 0.75rem !important;
   font-size: 0.75rem !important;
-  transition: var(--transition) !important;
+  transition: var(--fluid-transition) !important;
   opacity: 0 !important;
 }
 
@@ -479,9 +357,9 @@ body {
 }
 
 .docsify-copy-code-button:hover {
-  background-color: var(--primary) !important;
+  background-color: var(--fluid-primary) !important;
   color: white !important;
-  border-color: var(--primary) !important;
+  border-color: var(--fluid-primary) !important;
 }
 
 /* 自定义按钮 */
@@ -492,12 +370,12 @@ body {
   z-index: 9999 !important;
   display: flex !important;
   gap: 8px !important;
-  background-color: var(--bg-tertiary) !important;
+  background-color: var(--custom-buttons-bg-color) !important;
   padding: 8px !important;
   border-radius: 50px !important;
-  box-shadow: var(--shadow) !important;
-  border: 1px solid var(--border) !important;
-  transition: var(--transition) !important;
+  box-shadow: var(--custom-buttons-shadow) !important;
+  border: 1px solid var(--custom-buttons-border-color) !important;
+  transition: var(--fluid-transition) !important;
 }
 
 .custom-buttons button {
@@ -506,39 +384,39 @@ body {
   padding: 0 !important;
   border: none !important;
   border-radius: 50% !important;
-  background-color: var(--bg-tertiary) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--custom-buttons-bg-color) !important;
+  color: var(--fluid-text-primary) !important;
   font-size: 0.9rem !important;
   cursor: pointer !important;
-  transition: var(--transition) !important;
+  transition: var(--fluid-transition) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow: var(--shadow) !important;
+  box-shadow: var(--fluid-shadow) !important;
 }
 
 .custom-buttons button:hover {
-  background-color: var(--primary) !important;
+  background-color: var(--fluid-primary) !important;
   color: white !important;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover) !important;
+  box-shadow: var(--custom-buttons-hover-shadow) !important;
 }
 
 /* 优化文档标题样式 */
 .app-name-link {
   font-weight: 600 !important;
   font-size: 1.25rem !important;
-  color: var(--primary) !important;
+  color: var(--fluid-primary) !important;
 }
 
 /* 优化侧边栏切换按钮 */
 .sidebar-toggle {
-  background-color: var(--bg-tertiary) !important;
-  border: 1px solid var(--border) !important;
-  color: var(--text-primary) !important;
+  background-color: var(--custom-buttons-bg-color) !important;
+  border: 1px solid var(--custom-buttons-border-color) !important;
+  color: var(--fluid-text-primary) !important;
   border-radius: 50% !important;
-  box-shadow: var(--shadow) !important;
-  transition: var(--transition);
+  box-shadow: var(--custom-buttons-shadow) !important;
+  transition: var(--fluid-transition);
   width: 32px !important;
   height: 32px !important;
   display: flex !important;
@@ -547,11 +425,11 @@ body {
 }
 
 .sidebar-toggle:hover {
-  background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
+  background-color: var(--fluid-primary) !important;
+  border-color: var(--fluid-primary) !important;
   color: white !important;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover) !important;
+  box-shadow: var(--custom-buttons-hover-shadow) !important;
 }
 
 /* 优化滚动条样式 */
@@ -561,18 +439,18 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--fluid-bg-secondary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--text-tertiary);
+  background: var(--fluid-text-tertiary);
   border-radius: 4px;
-  transition: var(--transition);
+  transition: var(--fluid-transition);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light);
+  background: var(--fluid-primary-light);
 }
 
 /* 响应式设计 */
@@ -582,15 +460,8 @@ body {
     left: -100% !important;
   }
   
-  .app-main {
-    margin-left: 0 !important;
-  }
-  
-  .app-nav {
-    padding: 0.75rem 1rem !important;
-  }
-  
-  .content {
+  .markdown-section {
+    margin: 0.5rem !important;
     padding: 1.5rem !important;
   }
   
@@ -600,15 +471,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .app-nav {
-    padding: 0.5rem 0.75rem !important;
-  }
-  
-  .app-nav a {
-    margin: 0 0.5rem !important;
-  }
-  
-  .content {
+  .markdown-section {
     padding: 1rem !important;
     margin: 0.5rem !important;
   }
@@ -641,5 +504,40 @@ body {
   .custom-buttons button {
     width: 32px !important;
     height: 32px !important;
+  }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+  
+  .markdown-section {
+    margin: 0.5rem !important;
+    padding: 1.5rem !important;
+  }
+}
+
+/* 平板适配 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .markdown-section {
+    margin: 1rem !important;
+    padding: 2rem !important;
+  }
+}
+
+/* 桌面适配 */
+@media (min-width: 1025px) {
+  .markdown-section {
+    margin: 2rem auto !important;
+    padding: 2.5rem !important;
+  }
+}
+
+/* 超大屏幕适配 */
+@media (min-width: 1200px) {
+  :root {
+    --content-max-width: 1000px;
   }
 }

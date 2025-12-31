@@ -1,0 +1,105 @@
+/* Hexo Fluid Dark Theme Variables */
+[data-theme="dark"] {
+  /* 主色调 */
+  --fluid-primary: #409eff;
+  --fluid-primary-light: #79bbff;
+  --fluid-primary-dark: #337ecc;
+  --fluid-primary-lighter: rgba(64, 158, 255, 0.1);
+  
+  /* 辅助色 */
+  --fluid-success: #67c23a;
+  --fluid-warning: #e6a23c;
+  --fluid-danger: #f56c6c;
+  --fluid-info: #909399;
+  
+  /* 中性色 */
+  --fluid-bg: #1a1a1a;
+  --fluid-bg-secondary: #242424;
+  --fluid-bg-tertiary: #242424;
+  --fluid-text-primary: #e0e0e0;
+  --fluid-text-secondary: #b0b0b0;
+  --fluid-text-tertiary: #808080;
+  --fluid-border: #3a3a3a;
+  --fluid-divider: #3a3a3a;
+  --fluid-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+  --fluid-shadow-hover: 0 4px 16px 0 rgba(0, 0, 0, 0.4);
+  
+  /* 代码块 */
+  --fluid-code-bg: #2d2d2d;
+  --fluid-code-block-bg: #1e1e1e;
+  --fluid-code-color: #e0e0e0;
+  
+  /* 圆角 */
+  --fluid-border-radius: 8px;
+  --fluid-border-radius-lg: 12px;
+  
+  /* 过渡 */
+  --fluid-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 应用到docsify变量 */
+  --theme-color: var(--fluid-primary);
+  --sidebar-width: 260px;
+  --content-max-width: 900px;
+  
+  /* 背景和文本 */
+  --bg-color: var(--fluid-bg);
+  --text-color: var(--fluid-text-primary);
+  --sidebar-bg-color: var(--fluid-bg-tertiary);
+  --sidebar-text-color: var(--fluid-text-primary);
+  --sidebar-nav-link-color: var(--fluid-text-secondary);
+  --sidebar-nav-link-active-color: var(--fluid-primary);
+  --sidebar-nav-link-hover-color: var(--fluid-primary);
+  --sidebar-nav-link-border-color: var(--fluid-primary);
+  --sidebar-border-color: var(--fluid-divider);
+  
+  /* 主内容 */
+  --content-bg-color: var(--fluid-bg-tertiary);
+  --content-text-color: var(--fluid-text-primary);
+  --content-secondary-text-color: var(--fluid-text-secondary);
+  
+  /* 标题 */
+  --heading-color: var(--fluid-text-primary);
+  
+  /* 链接 */
+  --link-color: var(--fluid-primary);
+  --link-hover-color: var(--fluid-primary-light);
+  
+  /* 引用 */
+  --blockquote-border-color: var(--fluid-primary);
+  --blockquote-bg-color: var(--fluid-primary-lighter);
+  --blockquote-text-color: var(--fluid-text-secondary);
+  
+  /* 代码 */
+  --code-bg-color: var(--fluid-code-bg);
+  --code-text-color: var(--fluid-primary);
+  --code-block-bg-color: var(--fluid-code-block-bg);
+  --code-block-text-color: var(--fluid-code-color);
+  
+  /* 表格 */
+  --table-header-bg-color: var(--fluid-bg-secondary);
+  --table-header-text-color: var(--fluid-text-primary);
+  --table-border-color: var(--fluid-divider);
+  --table-row-hover-bg-color: var(--fluid-bg-secondary);
+  
+  /* 图片 */
+  --image-border-radius: var(--fluid-border-radius-lg);
+  --image-shadow: var(--fluid-shadow);
+  --image-hover-shadow: var(--fluid-shadow-hover);
+  
+  /* 按钮 */
+  --button-bg-color: var(--fluid-primary);
+  --button-text-color: #ffffff;
+  --button-hover-bg-color: var(--fluid-primary-light);
+  --button-hover-text-color: #ffffff;
+  
+  /* 滚动条 */
+  --scrollbar-track-bg-color: var(--fluid-bg-secondary);
+  --scrollbar-thumb-bg-color: var(--fluid-text-tertiary);
+  --scrollbar-thumb-hover-bg-color: var(--fluid-primary-light);
+  
+  /* 自定义按钮 */
+  --custom-buttons-bg-color: var(--fluid-bg-tertiary);
+  --custom-buttons-border-color: var(--fluid-border);
+  --custom-buttons-shadow: var(--fluid-shadow);
+  --custom-buttons-hover-shadow: var(--fluid-shadow-hover);
+}

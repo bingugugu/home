@@ -30,8 +30,7 @@
     <!-- 主题切换按钮 -->
     <div class="theme-preview"
         style="position: fixed; top: 10px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
-        <a data-theme="light" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">亮色主题</a>
-        <a data-theme="dark" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">暗黑主题</a>
+        <a id="theme-toggle" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">切换至暗黑主题</a>
     </div>
 
     <!-- 页面挂载点 -->
@@ -83,6 +82,7 @@
                         // 1. 找到切换容器和所有带title的样式表（只切换自定义主题）
                         var preview = Docsify.dom.find('.theme-preview');
                         var themes = Docsify.dom.findAll('[rel="stylesheet"][title]'); // 只筛选带title的样式表
+                        var toggleBtn = Docsify.dom.find('#theme-toggle');
 
                         // 2. 初始化主题：读取本地存储
                         const initTheme = () => {
@@ -90,22 +90,36 @@
                             themes.forEach(function (theme) {
                                 theme.disabled = theme.title !== savedTheme;
                             });
+                            // 更新按钮文字
+                            toggleBtn.textContent = savedTheme === 'light' ? '切换至暗黑主题' : '切换至亮色主题';
                         };
 
                         // 3. 点击切换逻辑
                         preview.onclick = function (e) {
-                            var targetTheme = e.target.getAttribute('data-theme');
-                            if (!targetTheme) return; // 点击非a标签则退出
+                            if (e.target.id !== 'theme-toggle') return; // 只响应切换按钮点击
 
+                            // 获取当前主题
+                            let currentTheme = 'light';
+                            themes.forEach(function (theme) {
+                                if (!theme.disabled) {
+                                    currentTheme = theme.title;
+                                }
+                            });
+
+                            // 切换到相反主题
+                            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                            
                             // 启用目标主题，禁用其他
                             themes.forEach(function (theme) {
-                                theme.disabled = theme.title !== targetTheme;
+                                theme.disabled = theme.title !== newTheme;
                             });
 
                             // 保存到本地存储
-                            localStorage.setItem('docsify-theme', targetTheme);
-                            // 实时更新按钮文字颜色（可选）
-                            e.target.style.color = targetTheme === 'dark' ? '#e9a182' : '#db785c';
+                            localStorage.setItem('docsify-theme', newTheme);
+                            
+                            // 更新按钮文字和颜色
+                            toggleBtn.textContent = newTheme === 'light' ? '切换至暗黑主题' : '切换至亮色主题';
+                            toggleBtn.style.color = newTheme === 'dark' ? '#e9a182' : '#db785c';
                         };
 
                         // 初始化主题

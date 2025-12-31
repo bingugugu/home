@@ -97,14 +97,15 @@ body {
 
 /* 页面容器 */
 .app-container {
-  background-color: var(--fluid-bg);
+  background-color: var(--fluid-bg) !important;
+  min-height: 100vh;
 }
 
 /* 顶部导航栏 - Fluid 主题风格 */
 .app-nav {
   background-color: var(--fluid-bg-tertiary) !important;
   border-bottom: 1px solid var(--fluid-divider) !important;
-  box-shadow: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
   padding: 0.75rem 2rem !important;
   position: sticky;
   top: 0;
@@ -163,6 +164,7 @@ body {
   margin: 0 !important;
   display: block;
   transition: var(--fluid-transition);
+  border-radius: 0 !important;
 }
 
 .sidebar-nav > ul > li > a:hover {
@@ -180,7 +182,7 @@ body {
 /* 侧边栏二级导航 */
 .sidebar-nav ul ul {
   margin: 0 !important;
-  padding-left: 1rem !important;
+  padding-left: 0 !important;
 }
 
 .sidebar-nav ul ul li a {
@@ -189,6 +191,7 @@ body {
   padding: 0.5rem 2rem !important;
   margin: 0 !important;
   transition: var(--fluid-transition);
+  border-radius: 0 !important;
 }
 
 .sidebar-nav ul ul li a:hover {
@@ -205,13 +208,14 @@ body {
 /* 内容区域 - Fluid 主题核心设计 */
 .content {
   background-color: var(--fluid-bg-tertiary) !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  border-radius: var(--fluid-border-radius-lg) !important;
+  box-shadow: var(--fluid-box-shadow) !important;
   padding: 2rem !important;
-  margin: 0 !important;
+  margin: 2rem !important;
   max-width: var(--content-max-width) !important;
   border: none !important;
   transition: var(--fluid-transition);
+  min-height: calc(100vh - 4rem);
 }
 
 /* 内容区域内边距优化 */
@@ -220,6 +224,37 @@ body {
   line-height: 1.8 !important;
   color: var(--fluid-text-primary) !important;
   animation: fluidFadeIn 0.6s ease-out;
+}
+
+/* 优化文档标题样式 */
+.app-name-link {
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  color: var(--fluid-primary) !important;
+}
+
+/* 优化侧边栏搜索框 */
+.sidebar .search {
+  margin: 1rem 1rem !important;
+  border-radius: var(--fluid-border-radius) !important;
+}
+
+/* 优化侧边栏切换按钮 */
+.sidebar-toggle {
+  background-color: var(--fluid-bg-tertiary) !important;
+  border: 1px solid var(--fluid-border) !important;
+  color: var(--fluid-text-primary) !important;
+  border-radius: var(--fluid-border-radius) !important;
+  box-shadow: none !important;
+  transition: var(--fluid-transition);
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--fluid-primary-lighter) !important;
+  border-color: var(--fluid-primary) !important;
+  color: var(--fluid-primary) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--fluid-box-shadow) !important;
 }
 
 /* 标题样式 - Fluid 主题风格 */
@@ -499,6 +534,10 @@ body {
   font-size: 0.75rem !important;
   transition: var(--fluid-transition) !important;
   opacity: 0 !important;
+  position: absolute !important;
+  top: 10px !important;
+  right: 10px !important;
+  z-index: 10 !important;
 }
 
 .markdown-section pre:hover .docsify-copy-code-button {

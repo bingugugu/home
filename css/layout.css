@@ -23,11 +23,11 @@ body {
   background-color: var(--bg-color) !important;
 }
 
-/* 侧边栏样式 */
+/* 侧边栏样式 - Hexo Fluid 风格 */
 .sidebar {
   background-color: var(--sidebar-bg-color) !important;
   border-right: 1px solid var(--sidebar-border-color) !important;
-  box-shadow: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
   padding: 0 !important;
   transition: var(--fluid-transition);
   width: var(--sidebar-width) !important;
@@ -39,23 +39,29 @@ body {
   z-index: 99;
 }
 
+.sidebar-nav {
+  padding: 1rem 0 !important;
+}
+
 /* 侧边栏标题 */
 .sidebar-nav > ul > li > a {
   color: var(--sidebar-text-color) !important;
   font-weight: 600 !important;
   font-size: 0.95rem !important;
-  padding: 0.75rem 1.25rem !important;
-  margin: 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  margin: 0.25rem 0 !important;
   display: block;
   transition: var(--fluid-transition);
-  border-radius: 0 !important;
+  border-radius: 0 4px 4px 0 !important;
   border-left: 3px solid transparent;
+  background-color: transparent !important;
 }
 
 .sidebar-nav > ul > li > a:hover {
   color: var(--sidebar-nav-link-hover-color) !important;
   background-color: var(--fluid-primary-lighter) !important;
   border-left-color: var(--sidebar-nav-link-border-color);
+  transform: translateX(2px);
 }
 
 /* 侧边栏激活状态 */
@@ -64,53 +70,77 @@ body {
   background-color: var(--fluid-primary-lighter) !important;
   font-weight: 600 !important;
   border-left-color: var(--sidebar-nav-link-border-color);
+  transform: translateX(2px);
 }
 
 /* 侧边栏二级导航 */
 .sidebar-nav ul ul {
-  margin: 0 !important;
+  margin: 0.25rem 0 !important;
   padding-left: 0 !important;
 }
 
 .sidebar-nav ul ul li a {
   color: var(--sidebar-nav-link-color) !important;
   font-size: 0.9rem !important;
-  padding: 0.5rem 1.5rem !important;
-  margin: 0 !important;
+  padding: 0.5rem 2rem !important;
+  margin: 0.125rem 0 !important;
   transition: var(--fluid-transition);
-  border-radius: 0 !important;
+  border-radius: 0 4px 4px 0 !important;
   border-left: 3px solid transparent;
+  background-color: transparent !important;
 }
 
 .sidebar-nav ul ul li a:hover {
   color: var(--sidebar-nav-link-hover-color) !important;
   background-color: var(--fluid-primary-lighter) !important;
   border-left-color: var(--sidebar-nav-link-border-color);
+  transform: translateX(2px);
 }
 
 /* 侧边栏三级导航 */
 .sidebar-nav ul ul ul li a {
   font-size: 0.85rem !important;
-  padding-left: 2rem !important;
+  padding-left: 2.5rem !important;
+  color: var(--fluid-text-tertiary) !important;
 }
 
-/* 主内容区域 */
+/* 侧边栏滚动条优化 */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: var(--fluid-bg-secondary);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--fluid-text-tertiary);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--fluid-primary-light);
+}
+
+/* 主内容区域 - Hexo Fluid 风格 */
 .markdown-section {
   background-color: var(--content-bg-color) !important;
   border-radius: var(--fluid-border-radius-lg) !important;
-  box-shadow: var(--fluid-shadow) !important;
-  padding: 2rem !important;
-  margin: 1rem !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08) !important;
+  padding: 2.5rem 3rem !important;
+  margin: 2rem auto !important;
   max-width: var(--content-max-width) !important;
   border: none !important;
   transition: var(--fluid-transition);
-}
-
-/* 主内容区域内边距优化 */
-.markdown-section {
   line-height: 1.8 !important;
   color: var(--content-text-color) !important;
-  margin: 2rem auto !important;
+}
+
+/* 主内容区域内边距优化 - 移动端适配 */
+@media (max-width: 768px) {
+  .markdown-section {
+    padding: 1.5rem 1.5rem !important;
+  }
 }
 
 /* 标题样式 */
@@ -210,22 +240,35 @@ body {
   transition: var(--fluid-transition);
 }
 
-/* 代码块样式 */
+/* 代码块样式 - Hexo Fluid 风格 */
 .markdown-section pre {
   background-color: var(--code-block-bg-color) !important;
   border-radius: var(--fluid-border-radius-lg) !important;
   box-shadow: var(--fluid-shadow) !important;
-  padding: 1.5rem !important;
+  padding: 0.5rem 1.5rem 1.5rem 1.5rem !important;
   margin: 1.5rem 0 !important;
   transition: var(--fluid-transition);
   position: relative;
   border: none !important;
+  overflow: hidden;
 }
 
 /* 代码块语言标签 */
 .markdown-section pre::before {
-  content: '';
-  display: none;
+  content: attr(data-lang);
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-bottom-left-radius: var(--fluid-border-radius);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 1;
 }
 
 /* 内联代码样式 */
@@ -244,10 +287,11 @@ body {
 .markdown-section pre > code {
   background-color: transparent !important;
   color: var(--code-block-text-color) !important;
-  padding: 0 !important;
+  padding: 1.5rem 0 0 0 !important;
   border-radius: 0 !important;
   font-size: 0.9em !important;
   line-height: 1.7 !important;
+  display: block;
 }
 
 /* 表格样式 */
@@ -342,14 +386,21 @@ body {
 
 /* 代码复制按钮样式 */
 .docsify-copy-code-button {
-  background-color: rgba(64, 158, 255, 0.1) !important;
-  color: var(--fluid-primary) !important;
-  border: 1px solid rgba(64, 158, 255, 0.2) !important;
-  border-radius: var(--fluid-border-radius) !important;
-  padding: 0.25rem 0.75rem !important;
+  background-color: rgba(64, 158, 255, 0.8) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 0.375rem 0.75rem !important;
   font-size: 0.75rem !important;
+  font-weight: 500 !important;
   transition: var(--fluid-transition) !important;
   opacity: 0 !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 2 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer !important;
 }
 
 .markdown-section pre:hover .docsify-copy-code-button {
@@ -358,8 +409,40 @@ body {
 
 .docsify-copy-code-button:hover {
   background-color: var(--fluid-primary) !important;
-  color: white !important;
-  border-color: var(--fluid-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3) !important;
+}
+
+/* 代码复制按钮点击效果 */
+.docsify-copy-code-button:active {
+  transform: translateY(0);
+}
+
+/* 代码行号样式 */
+.markdown-section pre[class*="language-"] > code {
+  counter-reset: line;
+}
+
+.markdown-section pre[class*="language-"] > code > span.line {
+  counter-increment: line;
+  display: block;
+  padding-left: 1.5rem !important;
+  position: relative;
+}
+
+.markdown-section pre[class*="language-"] > code > span.line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 1.25rem;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.5);
+  margin-right: 1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.85em;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* 自定义按钮 */

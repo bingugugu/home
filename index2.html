@@ -31,14 +31,51 @@
         }
     </style>
 
+    <style>
+        button {
+            border: none;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 主题切换按钮 - 绿色 */
+        .button1 {
+            background-color: #cfff4b;
+            color: black;
+        }
+
+        /* 返回顶部按钮 - 蓝色 */
+        .button2 {
+            background-color: #a7d8e9;
+            color: black;
+        }
+    </style>
+
 </head>
 
 <body>
     <!-- 自定义按钮 -->
     <div class="custom-buttons" 
-        style="position: fixed; top: 10px; right: 20px; z-index: 9999; display: flex; gap: 10px;">
-        <button class="button button1" id="theme-toggle" style="padding: 8px 16px; font-size: 14px; background-color: #cfff4b; color: black;">切换主题</button>
-        <button class="button button2" id="up-top" style="padding: 8px 16px; font-size: 14px; background-color: #a7d8e9; color: black;">返回顶部</button>
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 10px;">
+        <button class="button button1" id="theme-toggle" title="切换主题">🌙</button>
+        <button class="button button2" id="up-top" title="返回顶部">🔼</button>
     </div>
 
     <!-- 加载对话框 -->

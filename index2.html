@@ -34,6 +34,13 @@
 </head>
 
 <body>
+    <!-- 自定义按钮 -->
+    <div class="custom-buttons" 
+        style="position: fixed; top: 10px; right: 20px; z-index: 9999; display: flex; gap: 10px;">
+        <button class="button button1" id="theme-toggle" style="padding: 8px 16px; font-size: 14px; background-color: #cfff4b; color: black;">切换主题</button>
+        <button class="button button2" id="up-top" style="padding: 8px 16px; font-size: 14px; background-color: #a7d8e9; color: black;">返回顶部</button>
+    </div>
+
     <!-- 加载对话框 -->
     <div id="app"> 拯救世界中··· </div>
     <script>
@@ -72,6 +79,79 @@
                 pathNamespaces: ['/', '/about']
             },
             coverpage: true,
+            plugins: [
+                // 自定义按钮插件
+                function customButtonsPlugin(hook, vm) {
+                    // docsify初始化完成后执行
+                    hook.ready(function () {
+                        // ------------------------
+                        // 1. 主题切换功能
+                        // ------------------------
+                        const themes = document.querySelectorAll('link[rel="stylesheet"][media^="(prefers-color-scheme"]');
+                        const toggleBtn = Docsify.dom.find('#theme-toggle');
+
+                        // 初始化主题：读取本地存储
+                        const initTheme = () => {
+                            const savedTheme = localStorage.getItem('docsify-theme') || 'light';
+                            themes.forEach(function (theme) {
+                                if (theme.getAttribute('media').includes('light')) {
+                                    theme.setAttribute('media', savedTheme === 'light' ? 'all' : '(prefers-color-scheme: light)');
+                                } else if (theme.getAttribute('media').includes('dark')) {
+                                    theme.setAttribute('media', savedTheme === 'dark' ? 'all' : '(prefers-color-scheme: dark)');
+                                }
+                            });
+                        };
+
+                        // 点击切换逻辑
+                        if (toggleBtn) {
+                            toggleBtn.addEventListener('click', function () {
+                                // 获取当前主题
+                                let currentTheme = 'light';
+                                themes.forEach(function (theme) {
+                                    if (theme.getAttribute('media') === 'all') {
+                                        if (theme.getAttribute('media').includes('light')) {
+                                            currentTheme = 'light';
+                                        } else if (theme.getAttribute('media').includes('dark')) {
+                                            currentTheme = 'dark';
+                                        }
+                                    }
+                                });
+
+                                // 切换到相反主题
+                                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                                // 启用目标主题，禁用其他
+                                themes.forEach(function (theme) {
+                                    if (theme.getAttribute('media').includes('light')) {
+                                        theme.setAttribute('media', newTheme === 'light' ? 'all' : '(prefers-color-scheme: light)');
+                                    } else if (theme.getAttribute('media').includes('dark')) {
+                                        theme.setAttribute('media', newTheme === 'dark' ? 'all' : '(prefers-color-scheme: dark)');
+                                    }
+                                });
+
+                                // 保存到本地存储
+                                localStorage.setItem('docsify-theme', newTheme);
+                            });
+                        }
+
+                        // 初始化主题
+                        initTheme();
+
+                        // ------------------------
+                        // 2. 返回顶部功能
+                        // ------------------------
+                        const upTopBtn = Docsify.dom.find('#up-top');
+                        if (upTopBtn) {
+                            upTopBtn.addEventListener('click', function () {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: 'smooth'
+                                });
+                            });
+                        }
+                    });
+                },
+            ]
         }
     </script>
     <!-- docsify-themeable -->

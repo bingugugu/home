@@ -13,7 +13,7 @@
     <!-- 引入 Google Sans Code 字体（核心） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&display=swap" 
         rel="stylesheet">
 
     <!-- docsify 核心样式 -->
@@ -51,14 +51,12 @@
 </head>
 
 <body>
-    <!-- 主题切换按钮 -->
-    <div class="theme-preview"
-        style="position: fixed; top: 10px; right: 20px; z-index: 9999; font-family: var(--font-sans);">
-        <a id="theme-toggle" style="padding-right: 10px; cursor: pointer; color: var(--text-color);">切换至暗黑主题</a>
+    <!-- 自定义按钮 -->
+    <div class="custom-buttons" 
+        style="position: fixed; top: 10px; right: 20px; z-index: 9999; display: flex; gap: 10px;">
+        <button class="button button1" id="theme-toggle" style="padding: 8px 16px; font-size: 14px;">切换主题</button>
+        <button class="button button2" id="up-top" style="padding: 8px 16px; font-size: 14px;">返回顶部</button>
     </div>
-
-    <button class="button button1" id="theme-toggle" onclick="toggleTheme()">切换主题</button>
-    <button class="button button2" id="up-top" onclick="upTop()">返回顶部</button>
 
     <!-- 页面挂载点 -->
     <div id="app">拯救世界中···</div>
@@ -102,81 +100,66 @@
                         });
                     }
                 },
-                // 主题切换插件（核心：用docsify的hook确保DOM加载完成）
-                function themeTogglePlugin(hook, vm) {
-                    // docsify初始化完成后执行（关键：避免DOM未加载）
+                // 自定义按钮插件
+                function customButtonsPlugin(hook, vm) {
+                    // docsify初始化完成后执行
                     hook.ready(function () {
-                        // 1. 找到切换容器和所有带title的样式表（只切换自定义主题）
-                        var preview = Docsify.dom.find('.theme-preview');
-                        var themes = Docsify.dom.findAll('[rel="stylesheet"][title]'); // 只筛选带title的样式表
-                        var toggleBtn = Docsify.dom.find('#theme-toggle');
+                        // ------------------------
+                        // 1. 主题切换功能
+                        // ------------------------
+                        const themes = Docsify.dom.findAll('[rel="stylesheet"][title]'); // 筛选带title的样式表
+                        const toggleBtn = Docsify.dom.find('#theme-toggle');
 
-                        // 2. 初始化主题：读取本地存储
+                        // 初始化主题：读取本地存储
                         const initTheme = () => {
                             const savedTheme = localStorage.getItem('docsify-theme') || 'light';
                             themes.forEach(function (theme) {
                                 theme.disabled = theme.title !== savedTheme;
                             });
-                            // 更新按钮文字
-                            toggleBtn.textContent = savedTheme === 'light' ? '切换至暗黑主题' : '切换至亮色主题';
                         };
 
-                        // 3. 点击切换逻辑
-                        preview.onclick = function (e) {
-                            if (e.target.id !== 'theme-toggle') return; // 只响应切换按钮点击
+                        // 点击切换逻辑
+                        if (toggleBtn) {
+                            toggleBtn.addEventListener('click', function () {
+                                // 获取当前主题
+                                let currentTheme = 'light';
+                                themes.forEach(function (theme) {
+                                    if (!theme.disabled) {
+                                        currentTheme = theme.title;
+                                    }
+                                });
 
-                            // 获取当前主题
-                            let currentTheme = 'light';
-                            themes.forEach(function (theme) {
-                                if (!theme.disabled) {
-                                    currentTheme = theme.title;
-                                }
+                                // 切换到相反主题
+                                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+                                // 启用目标主题，禁用其他
+                                themes.forEach(function (theme) {
+                                    theme.disabled = theme.title !== newTheme;
+                                });
+
+                                // 保存到本地存储
+                                localStorage.setItem('docsify-theme', newTheme);
                             });
-
-                            // 切换到相反主题
-                            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-                            // 启用目标主题，禁用其他
-                            themes.forEach(function (theme) {
-                                theme.disabled = theme.title !== newTheme;
-                            });
-
-                            // 保存到本地存储
-                            localStorage.setItem('docsify-theme', newTheme);
-
-                            // 更新按钮文字和颜色
-                            toggleBtn.textContent = newTheme === 'light' ? '切换至暗黑主题' : '切换至亮色主题';
-                            toggleBtn.style.color = newTheme === 'dark' ? '#e9a182' : '#db785c';
-                        };
+                        }
 
                         // 初始化主题
                         initTheme();
+
+                        // ------------------------
+                        // 2. 返回顶部功能
+                        // ------------------------
+                        const upTopBtn = Docsify.dom.find('#up-top');
+                        if (upTopBtn) {
+                            upTopBtn.addEventListener('click', function () {
+                                window.scrollTo({
+                                    top: 0,
+                                    behavior: 'smooth'
+                                });
+                            });
+                        }
                     });
                 },
             ]
-        }
-    </script>
-
-    <!-- Custom JavaScript functions -->
-    <script>
-        // Toggle between light and dark themes
-        function toggleTheme() {
-            const themeLinks = document.querySelectorAll('link[rel="stylesheet"]');
-            themeLinks.forEach(link => {
-                if (link.getAttribute('media') === '(prefers-color-scheme: light)') {
-                    link.setAttribute('media', link.getAttribute('media') === 'all' ? '(prefers-color-scheme: light)' : 'all');
-                } else if (link.getAttribute('media') === '(prefers-color-scheme: dark)') {
-                    link.setAttribute('media', link.getAttribute('media') === 'all' ? '(prefers-color-scheme: dark)' : 'all');
-                }
-            });
-        }
-
-        // Scroll to top of the page
-        function upTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         }
     </script>
     <!-- docsify 核心脚本 -->
